@@ -12,6 +12,8 @@
 [core]
   pager = less -FRSX
 	editor = subl -n -w  >/dev/null 2>&1
+	excludesFile = /home/muna/.gitignore
+	autocrlf = true
 
 [alias]
   co = checkout
@@ -52,3 +54,14 @@
 [user]
 	email = 3223352545@qq.com
 	name = MunaLombe
+	signingkey = 19DBB8B9C5361683
+[credential]
+	helper = 
+	helper = /usr/local/bin/git-credential-manager
+	credentialStore = gpg
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[gpg]
+	format = ssh
+[credential "https://31b91e7f9954ad8aa334d46f012bd8ed.artifacts.cloudflare.net"]
+	provider = generic

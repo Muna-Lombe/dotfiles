@@ -4,3 +4,20 @@ alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/m
 
 # Quickly serve the current directory as HTTP
 alias serve='ruby -run -e httpd . -p 8000' # Or python -m SimpleHTTPServer :)
+#alias switch-to-win-devs=" cd /mnt/c/Users/Muna/Devs"
+alias switch-to-lin-devs="cd ~/code/Muna-Lombe"
+# symlink python3 to python
+alias python='python3'
+# alias to start android
+alias npm-serve='node /home/muna/.nvm/versions/node/v16.15.1/bin/serve'
+alias connect-vkcloud='ssh /home/muna/.ssh/Ubuntu-Advanced-8-16-248GB-4dqF9aS8.pem ubuntu@84.23.53.216'
+alias connect-yandexcloud='ssh muna@158.160.13.177'
+#alias start_droid=`export DISPLAY=$(ip route list default | awk '{print $3}\'):0 && echo "display id $DISPLAY" && cd /usr/local/android-studio/bin/studio.sh`
+alias create-dockerfile='starter -g dockerfile,service,docker-compose'
+alias localtunnel='/home/linuxbrew/.linuxbrew/bin/lt'
+alias ngrok-start='ngrok http --domain=leech-giving-seal.ngrok-free.app'
+alias elm-make='elm make'
+alias pvm='phpbrew'
+alias yupload='/home/muna/upload_to_yandex.sh'
+alias ydstart='yandex-disk start --exclude-dirs=demo.site,photos,pubacc,rollup,zoom_recordings,English\ IT\ course,English\ Regular,PC\ LEGION-GO,Whiteboard,Скриншоты,Файлы,Загрузки'
+alias ydstop='yandex-disk stop'

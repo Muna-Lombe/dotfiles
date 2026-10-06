@@ -4,7 +4,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
 # Useful oh-my-zsh plugins for Le Wagon bootcamps
-plugins=(git gitfast last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search pyenv)
+plugins=(git gitfast last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search pyenv ssh-agent)
 
 # (macOS-only) Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/docs/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
@@ -12,7 +12,7 @@ export HOMEBREW_NO_ANALYTICS=1
 # Actually load Oh-My-Zsh
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
-
+# export PATH=./bin:./node_modules/.bin:/home/muna/.nvm/versions/node/v16.15.1/bin:/home/muna/.pyenv/bin:/home/muna/.rbenv/shims:/home/muna/.rbenv/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program\ Files/Common\ Files/Oracle/Java/javapath:/mnt/c/Program\ Files\ \(x86\)/Common\ Files/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program\ Files\ \(x86\)/NVIDIA\ Corporation/PhysX/Common:/mnt/c/Program\ Files/NVIDIA\ Corporation/NVIDIA\ NvDLISR:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program\ Files\ \(x86\)/Windows\ Kits/10/Windows\ Performance\ Toolkit/:/mnt/c/Program\ Files\ \(x86\)/Windows\ Kits/10/Microsoft\ Application\ Virtualization/Sequencer/:/mnt/c/Program\ Files\ \(x86\)/dotnet/:/mnt/c/Program\ Files/dotnet/:/mnt/c/Program\ Files/Docker/Docker/resources/bin:/mnt/c/Users/Muna/AppData/Local/Programs/Eclipse\ Adoptium/jdk-17.0.3.7-hotspot/bin:/mnt/c/Users/Muna/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Muna/AppData/Local/Programs/Microsoft\ VS\ Code/bin:/mnt/c/Program\ Files\ \(x86\)/Java/jre1.8.0_331/bin/:/usr/local/sbin:/home/muna/.rvm/bin:/home/muna/.local/bin:/home/muna/.local/lib:/home/muna/linuxbrew/.linuxbrew/bin/python3
 # Load rbenv if installed (to manage your Ruby versions)
 export PATH="${HOME}/.rbenv/bin:${PATH}" # Needed for Linux/WSL
 type -a rbenv > /dev/null && eval "$(rbenv init -)"
@@ -61,3 +61,95 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
+#sudo /etc/init.d/postgresql start
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+# Add Python3 lib to PATH
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/lib"
+# export PGDATA="/usr/local/var/postgres"
+export PGDATA="/home/linuxbrew/.linuxbrew/var/postgresql@14"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/muna/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/muna/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/muna/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/muna/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@16/bin:$PATH"
+#sudo /etc/init.d/postgresql start
+
+# pnpm
+export PNPM_HOME="/home/muna/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# phpbrew
+export PHPBREW_ROOT="/home/muna/.phpbrew"
+[[ -e /home/muna/.phpbrew/bashrc ]] && source /home/muna/.phpbrew/bashrc
+export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/lib/pkgconfig"
+export LDFLAGS="-L/home/linuxbrew/.linuxbrew/lib"
+export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/include"
+
+# phpbrew end
+
+# flutter
+export PATH="$PATH:`pwd`/flutter/bin"
+
+# flutter end
+# Android SDK path
+#export ANDROID_HOME=/mnt/c/Users/Muna/AppData/Local/Android/Sdk
+# # avdmanager, sdkmanager
+#export PATH="$PATH:$ANDROID_HOME/tools"
+# # adb, logcat
+#export PATH="$PATH:$ANDROID_HOME/platform-tools"
+# # emulator
+#export PATH="$PATH:$ANDROID_HOME/emulator"
+# 
+# # apksigner and zipalign
+#export PATH="$PATH:$ANDROID_HOME/build-tools/34.0.0"
+#export PATH="$PATH:$ANDROID_HOME/build-tools/34.0.0"
+#export PATH="$PATH:$ANDROID_HOME/build-tools/33.0.2"
+# 
+# #jvm
+#export JVM_HOME=/mnt/c/'Program Files'/Android/'Android Studio'
+#export PATH="$PATH:$JVM_HOME"
+#export JBR_HOME="$JVM_HOME/jbr"
+
+# proxy
+# proxy setting
+proxy () {
+  export HTTPS_PROXY="http://192.168.1.64:10809";
+  export HTTP_PROXY="http://192.168.1.64:10809";
+  export ALL_PROXY="socks5://192.168.1.64:10808";
+  git config --global http.proxy "socks5://192.168.1.64:10808";
+  git config --global https.proxy "socks5://192.168.1.64:10808";
+  echo "Proxy on"
+}
+noproxy () {
+  unset HTTPS_PROXY;
+  unset HTTP_PROXY;
+  unset ALL_PROXY;
+  git config --global --unset  http.proxy;
+  git config --global --unset  https.proxy;
+  echo "HTTP Proxy off"
+}
+# proxy end
+PROMPT='%(?.%F{245}.%F{red})[%n@%m]%f%F{green}➜%f  %F{87}%~%f '
+
+# user bus
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+# user bus end
